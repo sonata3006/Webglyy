@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGLY - Sign Up</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">WELCOME TO WebGLY</h1>
+        <div class="signup-form">
+            <h2 class="subtitle">Sign Up</h2>
+            <form id="signupForm" action="#">
+                <div class="input-group">
+                    <label for="fullname">Full Name:</label><br>
+                    <input type="text" id="fullname" name="fullname" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label><br>
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" required>
+                        <span class="toggle-password" onclick="togglePassword()"></span>
+                    </div>
+                </div>
+                <input type="submit" value="Sign Up">
+            </form>
+            <p>Already have an account? <a href="login.html">Log in here</a></p>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var toggleIcon = document.querySelector(".toggle-password");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.add("show-password");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("show-password");
+            }
+        }
+
+        // Simpan data pengguna saat signup
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var fullname = document.getElementById("fullname").value;
+            var email = document.getElementById("email").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Simpan data pengguna ke dalam local storage
+            var userData = {
+                fullname: fullname,
+                email: email,
+                username: username,
+                password: password
+            };
+
+            localStorage.setItem("userData", JSON.stringify(userData));
+
+            // Redirect ke halaman login
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>
